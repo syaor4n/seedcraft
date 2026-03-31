@@ -12,8 +12,7 @@ Turn your [Claude Code](https://claude.ai/claude-code) coding stats into a uniqu
 [![MC 1.21+](https://img.shields.io/badge/Minecraft-1.21%2B-62B47A.svg)](https://minecraft.wiki)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/syaor4n)
 
-<!-- Replace with your actual GIF/screenshot: -->
-<!-- ![codecraft-seed demo](assets/demo.gif) -->
+![codecraft-seed demo](assets/demo.gif)
 
 **More messages = hotter biome. More tools = denser jungle. More hours = taller peaks.**
 
