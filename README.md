@@ -57,7 +57,8 @@ Every seed is selected from a curated database of **7,090 real Minecraft seeds**
 In Claude Code, run:
 
 ```
-/plugin add syaor4n/codecraft-seed
+/plugin marketplace add syaor4n/codecraft-seed
+/plugin install codecraft-seed@codecraft-seed
 ```
 
 That's it. Type `/codecraft-seed` to generate your seed.
@@ -73,7 +74,8 @@ git clone https://github.com/syaor4n/codecraft-seed.git
 Then in Claude Code:
 
 ```
-/plugin add /path/to/codecraft-seed
+/plugin marketplace add /path/to/codecraft-seed
+/plugin install codecraft-seed@codecraft-seed
 ```
 
 ### Standalone (no Claude Code needed)
