@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+tools/analyze_seeds
+tools/analyze.log
+tools/cubiomes/
+
+# Launch plan (private)
+LAUNCH.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

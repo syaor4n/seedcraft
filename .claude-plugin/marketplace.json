@@ -1,0 +1,20 @@
+{
+  "name": "codecraft-seed",
+  "owner": {
+    "name": "syaor4n"
+  },
+  "metadata": {
+    "description": "Your code. Your world. — Claude Code plugin that turns your coding stats into a Minecraft world seed."
+  },
+  "plugins": [
+    {
+      "name": "codecraft-seed",
+      "source": ".",
+      "description": "Turn your Claude Code coding stats into a unique Minecraft world seed. 7,090 curated seeds, 44 biomes, real climate correlation.",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["minecraft", "seed", "stats", "gaming", "claude-code"],
+      "category": "creative-coding"
+    }
+  ]
+}
