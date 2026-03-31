@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "codecraft-seed",
-      "source": ".",
+      "source": "./",
       "description": "Turn your Claude Code coding stats into a unique Minecraft world seed. 7,090 curated seeds, 44 biomes, real climate correlation.",
       "version": "1.0.0",
       "license": "MIT",
