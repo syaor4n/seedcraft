@@ -4,7 +4,7 @@
 
 ### Your code. Your world.
 
-Turn your [Claude Code](https://claude.ai/claude-code) coding stats into a unique Minecraft world seed.
+Your [Claude Code](https://claude.ai/claude-code) stats create a unique Minecraft world.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-green.svg)](https://python.org)
@@ -24,9 +24,9 @@ Turn your [Claude Code](https://claude.ai/claude-code) coding stats into a uniqu
 
 The more you code, the more your world evolves — heavy projects produce scorching badlands, marathon sessions raise jagged peaks, and diverse tool usage warps the terrain into alien landscapes.
 
-Every seed is selected from a curated database of **7,090 real Minecraft seeds** analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes), ensuring the spawn biome **genuinely matches** your coding profile. Paste the seed into Minecraft and you'll spawn in the biome your stats predicted.
+Your world is selected from a curated database of **7,090 real Minecraft seeds** analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes), ensuring the spawn biome **genuinely matches** your coding profile. Paste the seed into Minecraft and discover the world your code created.
 
-### Your Minecraft Seed: `-233730394`
+### Your Minecraft World: `-233730394`
 
 **Biome: Wooded Badlands** — Spawn at (-608, 112) [Java & Bedrock]
 
@@ -60,7 +60,7 @@ In Claude Code, run:
 /plugin install codecraft-seed@codecraft-seed
 ```
 
-That's it. Type `/codecraft-seed` to generate your seed.
+That's it. Type `/codecraft-seed` to discover your Minecraft world.
 
 The plugin auto-updates when you restart Claude Code.
 
@@ -108,21 +108,21 @@ The output ranges are calibrated to Minecraft's actual biome parameter space. A 
 ### Skill commands
 
 ```
-/codecraft-seed                     # Seed from your current project (auto-detected from CWD)
-/codecraft-seed all                 # Seed from all your projects combined
-/codecraft-seed my-api              # Seed from a specific project
-/codecraft-seed unique              # 100% unique seed hashed from your stats (biome is a surprise!)
+/codecraft-seed                     # World from your current project (auto-detected from CWD)
+/codecraft-seed all                 # World from all your projects combined
+/codecraft-seed my-api              # World from a specific project
+/codecraft-seed unique              # 100% unique world hashed from your stats (biome is a surprise!)
 /codecraft-seed --list              # See all your projects
 ```
 
-The skill also triggers on natural phrases like *"generate my minecraft seed"* or *"what's my minecraft world"*.
+The skill also triggers on natural phrases like *"create my minecraft world"* or *"what's my minecraft world"*.
 
 ### Two modes
 
 | Mode | What it does | Best for |
 |---|---|---|
-| **Default** (curated) | Selects from 7,090 pre-analyzed seeds. Spawn biome is known and matches your coding profile. | Seeing how your coding style maps to a Minecraft biome |
-| **Unique** (`--unique`) | SHA-256 hashes all your stats into a one-of-a-kind seed. Biome is unknown — discover it! | Getting a seed that's truly yours and only yours |
+| **Default** (curated) | Creates your world from 7,090 pre-analyzed seeds. Spawn biome is known and matches your coding profile. | Seeing how your coding style shapes a Minecraft world |
+| **Unique** (`--unique`) | SHA-256 hashes all your stats into a one-of-a-kind world. Biome is unknown — discover it! | Getting a world that's truly yours and only yours |
 
 ### Standalone CLI
 
@@ -140,7 +140,7 @@ python3 scripts/generate_seed.py --all --db /path/to/seeds.json # Custom seed DB
 
 Fuzzy matching is supported: `--project dashboard` matches `dashboard-v2`, `admin-dashboard`, etc.
 
-## Using your seed in Minecraft
+## Loading your world in Minecraft
 
 ### Java Edition
 
@@ -185,7 +185,7 @@ Make sure to select **Java** or **Bedrock** and the correct Minecraft version (1
 
 ## Biome rarity tiers
 
-Not all biomes are equally easy to unlock. Your coding intensity determines which tier you reach.
+Not all worlds are equally easy to unlock. Your coding intensity determines which tier you reach.
 
 **Common** — Most developers start here
 > Forest, Plains, Savanna, Taiga
@@ -204,12 +204,12 @@ Not all biomes are equally easy to unlock. Your coding intensity determines whic
 
 ## Share your world
 
-Got your seed? We want to see it.
+Got your world? We want to see it.
 
 - **Screenshot your terminal output** and post it on X/Twitter with `#codecraft-seed`
-- **Open the Chunkbase link**, screenshot the map, and share your spawn
+- **Open the Chunkbase link**, screenshot the map, and share your world
 - **Load the seed in Minecraft**, take a screenshot at spawn, and show your biome
-- **Compare with friends** — who has the rarest biome? Who codes in a jungle?
+- **Compare with friends** — who has the rarest world? Who codes in a jungle?
 
 If you build something cool with codecraft-seed (a web UI, a Discord bot, a leaderboard), open an issue — we'd love to feature it.
 
@@ -276,7 +276,7 @@ No. Everything runs locally. The script reads `~/.claude/` on your machine and o
 Yes. The output includes a Chunkbase link: `chunkbase.com/apps/seed-map#<your-seed>`. Open it in a browser to see the full world map.
 
 **I got snowy_plains. Is that boring?**
-It means your project is young or small. Code more and watch your world heat up. Even snowy plains have their charm — you can track your progress as the biome evolves.
+It means your project is young or small. Code more and watch your world evolve. Even snowy plains have their charm — track your progress as the biome transforms from frozen tundra to scorching badlands.
 
 **How accurate is the biome prediction?**
 Very. The two-stage selection guarantees the seed's spawn biome matches the closest biome center to your profile. We verified this against 7,090 real seeds analyzed with the same biome algorithm Minecraft uses internally.

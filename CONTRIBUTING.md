@@ -5,7 +5,7 @@ Thanks for your interest! Here are ways to contribute:
 ## Easy contributions
 
 - **Add narrative templates** — See `BIOME_NARRATIVES` in `scripts/generate_seed.py`. Each biome has a short text that explains *why* the user got that world. Some biomes still use the generic fallback. Write a better one!
-- **Expand the seed database** — Run `cd tools && make && make db` to generate more seeds, then merge them into `data/seeds_db.json`. More seeds = better biome coverage.
+- **Expand the seed database** — Run `cd tools && make && make db` to generate more seeds, then merge them into `data/seeds_db.json`. More seeds = more unique worlds.
 - **Improve pretty_project_name** — The function that converts Claude Code project directory names to readable names. If it misparses yours, submit a fix with a test case.
 
 ## Medium contributions
