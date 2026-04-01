@@ -1,5 +1,5 @@
 ---
-name: codecraft-seed
+name: craft
 description: >
   Converts Claude Code usage statistics into a Minecraft world seed with
   real biome correlation. Maps coding behavior to Minecraft climate parameters
@@ -10,11 +10,13 @@ description: >
   variation of turning Claude Code usage into a Minecraft world seed.
 ---
 
-# codecraft-seed
+# SeedCraft
 
 Converts Claude Code usage statistics into a Minecraft world seed with **real
 biome correlation** — the generated world's spawn biome genuinely reflects
 your coding behavior.
+
+**Web companion:** [seedcraft.dev](https://seedcraft.dev) — browse the community gallery, explore biome tiers, and share your world.
 
 ## How it works
 
@@ -29,8 +31,9 @@ your coding behavior.
    - More write/edit calls = more continental (less ocean)
    - More unique tools = weirder terrain
    - More agent calls = more structures/villages
-4. Uses **two-stage biome selection** from a curated database of 7,090 seeds
-   (analyzed via Cubiomes for MC 1.21): first finds the correct biome, then
+4. Calls the **SeedCraft API** (seedcraft.dev) for matching against **500,000 curated seeds**.
+   If the API is unreachable, falls back to a local database of 7,090 seeds.
+   Uses two-stage biome selection: first finds the correct biome, then
    the best individual seed within that biome
 5. Outputs the seed, a visual climate card, and a biome-specific narrative
 
@@ -139,11 +142,19 @@ your coding behavior.
 
 ## Technical notes
 
+- Calls the SeedCraft API (seedcraft.dev) with 8 aggregated numbers for matching against 500,000 seeds
+- If the API is unreachable (offline, timeout >5s), falls back to a local database of 7,090 seeds
 - Two-stage selection: biome center matching, then individual seed matching
-- Seeds are from a pre-analyzed database of 7,090 seeds (Cubiomes, MC 1.21)
 - Each seed's spawn biome and climate parameters are verified at the block level
 - Selection uses weighted Euclidean distance on 5 core climate parameters
 - A SHA-256 fingerprint of the user's stats provides deterministic tiebreaking
 - Same stats always produce the same seed (deterministic)
 - Includes subagent sessions (often 99% of Claude Code activity)
 - Works on Java & Bedrock 1.18+ (identical terrain generation)
+
+## Privacy
+
+The API call sends **only 8 aggregated numbers**: messages, tool_calls, write_calls,
+total_active_hours, unique_tools, agent_calls, orchestrate_calls, project_count.
+No code, no file names, no project names, no conversation content. If the API is
+unreachable, everything works offline. No telemetry, no tracking, no account required.

@@ -1248,7 +1248,7 @@ class TestJsonOutputFields(unittest.TestCase):
                        "compatibility", "chunkbase_url", "share_text", "profile", "stats", "mode"]:
             self.assertIn(field, data, f"Missing field: {field}")
         self.assertIn("chunkbase.com", data["chunkbase_url"])
-        self.assertIn("#codecraft-seed", data["share_text"])
+        self.assertIn("#SeedCraft", data["share_text"])
         self.assertIn(str(data["seed"]), data["chunkbase_url"])
 
     def test_unique_json_has_all_fields(self):

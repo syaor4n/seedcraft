@@ -1,4 +1,4 @@
-# Contributing to codecraft-seed
+# Contributing to SeedCraft
 
 Thanks for your interest! Here are ways to contribute:
 
@@ -20,18 +20,18 @@ This is a Claude Code **plugin** using the official plugin format:
 
 ```
 .claude-plugin/plugin.json     # Plugin manifest (name, version)
-skills/codecraft-seed/SKILL.md # Skill instructions (what Claude does)
+skills/seedcraft/SKILL.md # Skill instructions (what Claude does)
 scripts/generate_seed.py       # Main Python script
 data/seeds_db.json             # Curated seed database
 ```
 
-Users install with `/plugin add syaor4n/codecraft-seed`.
+Users install with `/plugin add syaor4n/seedcraft`.
 
 ## Development setup
 
 ```bash
-git clone https://github.com/syaor4n/codecraft-seed.git
-cd codecraft-seed
+git clone https://github.com/syaor4n/seedcraft.git
+cd seedcraft
 python3 -m unittest tests.test_generate_seed -v  # Run tests
 ```
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-# codecraft-seed
+# SeedCraft
 
 ### Your code. Your world.
 
@@ -11,12 +11,13 @@ Your [Claude Code](https://claude.ai/claude-code) stats create a unique Minecraf
 [![Tests: 108 passing](https://img.shields.io/badge/Tests-108%20passing-brightgreen.svg)](tests/)
 [![MC 1.21+](https://img.shields.io/badge/Minecraft-1.21%2B-62B47A.svg)](https://minecraft.wiki)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/syaor4n)
+[![Web](https://img.shields.io/badge/Web-seedcraft.dev-DA7756)](https://seedcraft.dev)
 
-![codecraft-seed demo](assets/demo.gif)
+![SeedCraft demo](assets/demo.gif)
 
 **More messages = hotter biome. More tools = denser jungle. More hours = taller peaks.**
 
-[Quick Start](#quick-start) | [How It Works](#how-your-coding-shapes-the-world) | [Biome Tiers](#biome-rarity-tiers) | [Share Your World](#share-your-world)
+[Quick Start](#quick-start) | [How It Works](#how-your-coding-shapes-the-world) | [Biome Tiers](#biome-rarity-tiers) | [Gallery](https://seedcraft.dev/gallery) | [Share Your World](#share-your-world)
 
 </div>
 
@@ -24,7 +25,7 @@ Your [Claude Code](https://claude.ai/claude-code) stats create a unique Minecraf
 
 The more you code, the more your world evolves — heavy projects produce scorching badlands, marathon sessions raise jagged peaks, and diverse tool usage warps the terrain into alien landscapes.
 
-Your world is selected from a curated database of **7,090 real Minecraft seeds** analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes), ensuring the spawn biome **genuinely matches** your coding profile. Paste the seed into Minecraft and discover the world your code created.
+Your world is selected from a curated database of **500,000 real Minecraft seeds** analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes) across **46 biomes**, ensuring the spawn biome **genuinely matches** your coding profile. Paste the seed into Minecraft and discover the world your code created.
 
 ### Your Minecraft World: `-233730394`
 
@@ -56,32 +57,32 @@ Your world is selected from a curated database of **7,090 real Minecraft seeds**
 In Claude Code, run:
 
 ```
-/plugin marketplace add syaor4n/codecraft-seed
-/plugin install codecraft-seed@codecraft-seed
+/plugin marketplace add syaor4n/seedcraft
+/plugin install seedcraft@seedcraft
 ```
 
-That's it. Type `/codecraft-seed` to discover your Minecraft world.
+That's it. Type `/seedcraft:craft` to discover your Minecraft world.
 
 The plugin auto-updates when you restart Claude Code.
 
 ### Install from local clone
 
 ```bash
-git clone https://github.com/syaor4n/codecraft-seed.git
+git clone https://github.com/syaor4n/seedcraft.git
 ```
 
 Then in Claude Code:
 
 ```
-/plugin marketplace add /path/to/codecraft-seed
-/plugin install codecraft-seed@codecraft-seed
+/plugin marketplace add /path/to/seedcraft
+/plugin install seedcraft@seedcraft
 ```
 
 ### Standalone (no Claude Code needed)
 
 ```bash
-git clone https://github.com/syaor4n/codecraft-seed.git
-cd codecraft-seed
+git clone https://github.com/syaor4n/seedcraft.git
+cd seedcraft
 python3 scripts/generate_seed.py --all
 ```
 
@@ -89,7 +90,7 @@ Only requires Python 3.9+. No pip install, no dependencies.
 
 ## How your coding shapes the world
 
-Minecraft 1.18+ generates biomes using 6 climate parameters (temperature, humidity, continentalness, erosion, weirdness, depth). codecraft-seed maps your Claude Code stats to these exact parameters, then finds a real seed whose spawn matches.
+Minecraft 1.18+ generates biomes using 6 climate parameters (temperature, humidity, continentalness, erosion, weirdness, depth). SeedCraft maps your Claude Code stats to these exact parameters, then finds a real seed whose spawn matches.
 
 | What you do in Claude Code | What happens in Minecraft | Example |
 |---|---|---|
@@ -108,11 +109,11 @@ The output ranges are calibrated to Minecraft's actual biome parameter space. A 
 ### Skill commands
 
 ```
-/codecraft-seed                     # World from your current project (auto-detected from CWD)
-/codecraft-seed all                 # World from all your projects combined
-/codecraft-seed my-api              # World from a specific project
-/codecraft-seed unique              # 100% unique world hashed from your stats (biome is a surprise!)
-/codecraft-seed --list              # See all your projects
+/seedcraft:craft                     # World from your current project (auto-detected from CWD)
+/seedcraft:craft all                 # World from all your projects combined
+/seedcraft:craft my-api              # World from a specific project
+/seedcraft:craft unique              # 100% unique world hashed from your stats (biome is a surprise!)
+/seedcraft:craft --list              # See all your projects
 ```
 
 The skill also triggers on natural phrases like *"create my minecraft world"* or *"what's my minecraft world"*.
@@ -121,7 +122,7 @@ The skill also triggers on natural phrases like *"create my minecraft world"* or
 
 | Mode | What it does | Best for |
 |---|---|---|
-| **Default** (curated) | Creates your world from 7,090 pre-analyzed seeds. Spawn biome is known and matches your coding profile. | Seeing how your coding style shapes a Minecraft world |
+| **Default** (curated) | Creates your world from 500,000 pre-analyzed seeds across 46 biomes. Spawn biome is known and matches your coding profile. | Seeing how your coding style shapes a Minecraft world |
 | **Unique** (`--unique`) | SHA-256 hashes all your stats into a one-of-a-kind world. Biome is unknown — discover it! | Getting a world that's truly yours and only yours |
 
 ### Standalone CLI
@@ -160,7 +161,7 @@ To verify: type `/seed` in the chat (works without cheats in Java singleplayer).
 4. Paste your seed number in the **Seed** field
 5. Tap **Create**
 
-> **Note:** Bedrock Edition uses 32-bit seeds. codecraft-seed prefers Bedrock-compatible seeds (shown as `[Java & Bedrock]` in the output). Seeds marked `[Java only]` will generate a different world on Bedrock.
+> **Note:** Bedrock Edition uses 32-bit seeds. SeedCraft prefers Bedrock-compatible seeds (shown as `[Java & Bedrock]` in the output). Seeds marked `[Java only]` will generate a different world on Bedrock.
 
 ### Preview on Chunkbase (no Minecraft needed)
 
@@ -188,30 +189,40 @@ Make sure to select **Java** or **Bedrock** and the correct Minecraft version (1
 Not all worlds are equally easy to unlock. Your coding intensity determines which tier you reach.
 
 **Common** — Most developers start here
-> Forest, Plains, Savanna, Taiga
+> Plains, Forest, Savanna
 
 **Uncommon** — Regular Claude Code users
-> Desert, Snowy Plains, Dripstone Caves, Snowy Taiga, Jungle, Birch Forest, Old Growth Birch Forest, Dark Forest, Beach, Sparse Jungle
+> Old Growth Birch Forest, Birch Forest, Snowy Taiga, Dripstone Caves, Desert, Snowy Plains, Taiga
 
 **Rare** — Power users with significant projects
-> Stony Shore, Swamp, Sunflower Plains, Old Growth Pine Taiga, Old Growth Spruce Taiga, Flower Forest, Bamboo Jungle, Badlands
+> Stony Shore, Sparse Jungle, Beach, Dark Forest, Jungle
 
 **Epic** — Heavy long-term users only
-> Lush Caves, Wooded Badlands, Meadow, Grove, Mangrove Swamp, Windswept Savanna, Snowy Slopes, Snowy Beach, Windswept Hills, Eroded Badlands, Ice Spikes
+> Mangrove Swamp, Grove, Lush Caves, Badlands, Old Growth Pine Taiga, Old Growth Spruce Taiga, Bamboo Jungle, Sunflower Plains, Flower Forest, Swamp
 
-**Legendary** — Extreme stats required (< 0.3% of seeds)
-> Savanna Plateau, Windswept Forest, Frozen Peaks, Cherry Grove, Jagged Peaks, Stony Peaks, Frozen Ocean, Lukewarm Ocean, Pale Garden, Cold Ocean, Ocean (if you get one of these, you've earned bragging rights)
+**Legendary** — Extreme stats required (< 5% of seeds)
+> Warm Ocean, Lukewarm Ocean, Cold Ocean, Ocean, Pale Garden, Frozen Ocean, Stony Peaks, Jagged Peaks, Frozen Peaks, Cherry Grove, Windswept Forest, Savanna Plateau, Windswept Hills, Ice Spikes, Eroded Badlands, Snowy Beach, Snowy Slopes, Windswept Savanna, Wooded Badlands, Meadow (if you get one of these, you've earned bragging rights)
+
+## seedcraft.dev
+
+The web companion for SeedCraft: **[seedcraft.dev](https://seedcraft.dev)**
+
+- **Interactive demo** — see how coding stats map to Minecraft climate parameters with live sliders
+- **Community gallery** — browse and share worlds generated by other developers ([seedcraft.dev/gallery](https://seedcraft.dev/gallery))
+- **500K seed database** — the skill calls the API for matching against 500,000 curated seeds (with local fallback if offline)
+- **Biome tiers** — discover which biomes are common, rare, and legendary
+
+The skill automatically calls the seedcraft.dev API when online. If the API is unreachable, it falls back to the local 7K seed database — everything still works offline.
 
 ## Share your world
 
 Got your world? We want to see it.
 
-- **Screenshot your terminal output** and post it on X/Twitter with `#codecraft-seed`
+- **Share on the gallery** — go to [seedcraft.dev/gallery](https://seedcraft.dev/gallery) and submit your seed with a comment
+- **Post on X/Twitter** with `#SeedCraft`
 - **Open the Chunkbase link**, screenshot the map, and share your world
 - **Load the seed in Minecraft**, take a screenshot at spawn, and show your biome
 - **Compare with friends** — who has the rarest world? Who codes in a jungle?
-
-If you build something cool with codecraft-seed (a web UI, a Discord bot, a leaderboard), open an issue — we'd love to feature it.
 
 ## How it works (technical)
 
@@ -233,9 +244,9 @@ Maps each stat to a Minecraft climate parameter using piecewise linear interpola
 
 ### 3. Two-stage seed selection (default mode)
 
-1. **Biome matching** — Computes weighted Euclidean distance from your profile to the average climate center of each of the 44 biome types. The closest biome wins.
+1. **Biome matching** — Computes weighted Euclidean distance from your profile to the average climate center of each of the 46 biome types. The closest biome wins.
 2. **Seed selection** — Among all seeds of the winning biome, finds the closest individual match. Prefers Bedrock-compatible (32-bit) seeds.
-3. **Deterministic tiebreak** — SHA-256 hash of your stats picks among the top-5 closest seeds. Same stats always produce the same seed.
+3. **Deterministic tiebreak** — SHA-256 hash of your stats picks among the top-20 closest seeds. Same stats always produce the same seed.
 
 This two-stage approach guarantees the biome is always the conceptually correct one. The hash only varies the specific seed, never the biome.
 
@@ -245,7 +256,7 @@ Hashes 16 stat dimensions (messages, human/assistant counts, tool calls, unique 
 
 ### 4. Seed database
 
-`data/seeds_db.json` contains 7,090 seeds analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes) for Minecraft 1.21. Each seed has its spawn biome verified at block scale with 5 climate noise parameters and a biome diversity score. 44 of the 51 spawnable overworld biomes are represented (the remaining 7 — deep oceans, mushroom fields, warm ocean, windswept gravelly hills — are virtually impossible spawn points in Minecraft).
+`data/seeds_db.json` contains 500,000 seeds analyzed with [Cubiomes](https://github.com/Cubitect/cubiomes) for Minecraft 1.21. Each seed has its spawn biome verified at block scale with 5 climate noise parameters and a biome diversity score. 46 of the 51 spawnable overworld biomes are represented.
 
 To regenerate or expand:
 
@@ -264,13 +275,16 @@ No. The same stats always produce the same seed. Your seed only changes when you
 Yes, slightly — each new message adjusts your stats. If you want to "lock in" a seed, save it somewhere. The changes are gradual: one extra message won't jump you from jungle to desert.
 
 **Does it work on Bedrock?**
-Mostly yes. Since Minecraft 1.18, Java and Bedrock generate the same **terrain and biomes** from the same seed. However, **structures** (villages, temples, strongholds) will be in different locations. Also, Bedrock only supports 32-bit seeds — codecraft-seed prefers Bedrock-compatible seeds and marks compatibility in the output (`[Java & Bedrock]` vs `[Java only]`).
+Yes. SeedCraft generates **32-bit seeds** (range −2,147,483,648 to 2,147,483,647) which work on both Java and Bedrock. Since Minecraft 1.18, both editions generate the same **terrain and biomes** from the same seed. Structures (villages, temples, strongholds) will be in different locations between editions.
+
+**Why not 64-bit seeds like `8150810962987124925`?**
+Minecraft Java Edition supports 64-bit seeds (18.4 quintillion possibilities), while Bedrock only supports 32-bit (4.3 billion). SeedCraft deliberately uses 32-bit seeds so your world works on **every platform** — Java, Bedrock, Windows, Xbox, PlayStation, Switch, iOS, Android. With 500,000 curated seeds across 46 biomes, the 32-bit range provides more than enough diversity for precise biome matching. The terrain and biome generation is identical regardless of seed size — a 32-bit seed produces worlds just as rich as a 64-bit one.
 
 **What Minecraft version should I use?**
 1.18 or later. The seed database was analyzed for 1.21, but all 1.18+ versions use the same multi-noise biome system.
 
 **Is my data sent anywhere?**
-No. Everything runs locally. The script reads `~/.claude/` on your machine and outputs a number. No network requests, no telemetry, no API calls. Your session data never leaves your computer.
+When using the skill, a single API call is made to our server with **8 aggregated numbers only**: messages, tool_calls, write_calls, total_active_hours, unique_tools, agent_calls, orchestrate_calls, and project_count. No code, no file names, no project names, no conversation content — just 8 counters. This lets us match your profile against the full 500,000-seed database hosted on our server. If the API is unreachable, the skill falls back to a local computation using a smaller embedded seed database — everything still works offline. No telemetry, no tracking, no account required.
 
 **Can I preview my world without Minecraft?**
 Yes. The output includes a Chunkbase link: `chunkbase.com/apps/seed-map#<your-seed>`. Open it in a browser to see the full world map.
@@ -279,7 +293,7 @@ Yes. The output includes a Chunkbase link: `chunkbase.com/apps/seed-map#<your-se
 It means your project is young or small. Code more and watch your world evolve. Even snowy plains have their charm — track your progress as the biome transforms from frozen tundra to scorching badlands.
 
 **How accurate is the biome prediction?**
-Very. The two-stage selection guarantees the seed's spawn biome matches the closest biome center to your profile. We verified this against 7,090 real seeds analyzed with the same biome algorithm Minecraft uses internally.
+Very. The two-stage selection guarantees the seed's spawn biome matches the closest biome center to your profile. We verified this against 500,000 real seeds analyzed with the same biome algorithm Minecraft uses internally.
 
 ## Running tests
 
@@ -292,16 +306,16 @@ python3 -m unittest tests.test_generate_seed -v
 ## Project structure
 
 ```
-codecraft-seed/
+seedcraft/
 ├── .claude-plugin/
 │   └── plugin.json            # Plugin manifest (name, version, author)
 ├── skills/
-│   └── codecraft-seed/
+│   └── seedcraft/
 │       └── SKILL.md           # Skill definition (instructions for Claude)
 ├── scripts/
 │   └── generate_seed.py       # Main script (no dependencies)
 ├── data/
-│   └── seeds_db.json          # 7,090 curated seeds
+│   └── seeds_db.json          # 500,000 curated seeds
 ├── tests/
 │   └── test_generate_seed.py  # 108 tests
 ├── tools/

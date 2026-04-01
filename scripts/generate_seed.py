@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-codecraft-seed — Claude Code to Minecraft Seed Generator
+SeedCraft — Claude Code to Minecraft Seed Generator
 
 Reads Claude Code session data from ~/.claude/, computes a climate profile
 from usage statistics, and selects a curated Minecraft seed whose spawn
@@ -521,21 +521,21 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
 
     if unique:
         share_text = (
-            f"#codecraft-seed | UNIQUE | {msgs} msgs, {tools} tools, {total_h:.0f}h coding"
+            f"#SeedCraft | UNIQUE | {msgs} msgs, {tools} tools, {total_h:.0f}h coding"
         )
         tweet_text = (
             f"My Claude Code stats as a Minecraft seed: UNIQUE\n\n"
             f"{msgs} messages | {tools} tools | {total_h:.0f}h coded\n\n"
             f"What's YOUR coding world?\n"
-            f"github.com/syaor4n/codecraft-seed\n\n"
-            f"#CodecraftSeed #ClaudeCode #Minecraft"
+            f"seedcraft.dev\n\n"
+            f"#SeedCraft #ClaudeCode #Minecraft"
         )
     else:
         temp = int(profile["temperature"] * 100)
         humid = int(profile["humidity"] * 100)
         elev = int((1 - profile["erosion"]) * 100)
         share_text = (
-            f"#codecraft-seed | {biome_display} | {temp}% hot, {humid}% humid, "
+            f"#SeedCraft | {biome_display} | {temp}% hot, {humid}% humid, "
             f"{elev}% elevation | {total_h:.0f}h coding"
         )
         tweet_text = (
@@ -543,8 +543,8 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
             f"{temp}% hot | {humid}% humid | {elev}% elevation\n"
             f"{msgs} messages | {tools} tools | {total_h:.0f}h coded\n\n"
             f"What's YOUR coding world?\n"
-            f"github.com/syaor4n/codecraft-seed\n\n"
-            f"#CodecraftSeed #ClaudeCode #Minecraft"
+            f"seedcraft.dev\n\n"
+            f"#SeedCraft #ClaudeCode #Minecraft"
         )
 
     tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
@@ -1076,7 +1076,7 @@ def render_output(seed_entry, profile, stats, mode_label):
     temp = int(profile["temperature"] * 100)
     humid = int(profile["humidity"] * 100)
     print()
-    print(f"  #codecraft-seed | {biome_display} | {temp}% hot, {humid}% humid, {elev}% elevation | {total_h:.0f}h coding")
+    print(f"  #SeedCraft | {biome_display} | {temp}% hot, {humid}% humid, {elev}% elevation | {total_h:.0f}h coding")
     print()
 
 
@@ -1213,6 +1213,54 @@ def _detect_cwd_project(projects):
     return None
 
 
+# ---------------------------------------------------------------------------
+# API integration — call seedcraft.dev for 500K seed matching
+# ---------------------------------------------------------------------------
+
+SEEDCRAFT_API_URL = "https://seedcraft.dev/api/generate"
+SEEDCRAFT_TIMEOUT = 5  # seconds
+
+def _build_api_stats(stats):
+    """Build the stats payload for the SeedCraft API from merged stats."""
+    return {
+        "messages": stats["messages"],
+        "tool_calls": stats["tool_calls"],
+        "write_calls": stats["write_calls"],
+        "total_active_hours": stats["total_active_ms"] / 3_600_000,
+        "unique_tools": len(stats["tools_used"]),
+        "agent_calls": stats["agent_calls"],
+        "orchestrate_calls": stats["orchestrate_calls"],
+        "project_count": stats["project_count"],
+    }
+
+
+def try_api_generate(stats, mode="curated"):
+    """Try to generate a seed via the SeedCraft API (500K seeds).
+
+    Returns the API response dict on success, or None on failure.
+    Falls back silently so the local DB can be used instead.
+    """
+    try:
+        import urllib.request
+        payload = json.dumps({
+            "mode": mode,
+            "stats": _build_api_stats(stats),
+        }).encode("utf-8")
+
+        req = urllib.request.Request(
+            SEEDCRAFT_API_URL,
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=SEEDCRAFT_TIMEOUT) as resp:
+            if resp.status == 200:
+                return json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        pass  # Network error, timeout, API down — fall back to local
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Convert Claude Code stats into a Minecraft world seed.",
@@ -1326,7 +1374,12 @@ def main():
 
     # --unique mode: hash stats directly into a seed (no DB lookup)
     if args.unique:
-        seed = generate_unique_seed(merged)
+        # Try API first (consistent with curated mode)
+        api_result = try_api_generate(merged, mode="unique")
+        if api_result:
+            seed = api_result["seed"]
+        else:
+            seed = generate_unique_seed(merged)
         compat = "Java & Bedrock" if _is_bedrock_safe(seed) else "Java only"
         share_text, tweet_url = _make_share_card(seed, "UNIQUE", merged, unique=True)
         if args.json:
@@ -1357,10 +1410,32 @@ def main():
             print()
         return
 
-    # Load seed DB & select (default: biome-matched)
-    db_path = Path(args.db) if args.db else None
-    seeds_db = load_seed_database(db_path)
-    seed_entry = select_seed(profile, seeds_db, merged)
+    # Default: biome-matched seed selection
+    # Try API first (500K seeds, better matching)
+    api_result = try_api_generate(merged, mode="curated")
+
+    if api_result and "seed" in api_result and "spawn_biome" in api_result:
+        # API succeeded — use its result (500K seed DB)
+        seed_entry = {
+            "seed": api_result["seed"],
+            "spawn_biome": api_result["spawn_biome"],
+            "spawn_x": api_result.get("spawn_x", 0),
+            "spawn_z": api_result.get("spawn_z", 0),
+            "climate": api_result.get("profile", profile),
+            "biome_diversity": 0,
+        }
+        # Use API profile if available
+        if "profile" in api_result:
+            profile.update({
+                k: api_result["profile"][k]
+                for k in api_result["profile"]
+                if k in profile
+            })
+    else:
+        # API failed — fall back to local DB (7K seeds)
+        db_path = Path(args.db) if args.db else None
+        seeds_db = load_seed_database(db_path)
+        seed_entry = select_seed(profile, seeds_db, merged)
 
     # Output
     seed = seed_entry["seed"]
