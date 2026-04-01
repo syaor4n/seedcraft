@@ -570,7 +570,7 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
     # Pre-filled gallery submission URL
     gallery_params_dict = {
         "seed": seed,
-        "comment": f"{total_h:.0f}h of coding" + (f" → {biome_display}" if not unique else ""),
+        "comment": f"{total_h:.0f}h of coding, {stats['messages']:,} messages",
     }
     if not unique:
         gallery_params_dict["biome"] = biome_display.lower().replace(" ", "_")
