@@ -448,6 +448,7 @@ CLIMATE_WEIGHTS = {
     "continentalness": 1.0,
     "erosion": 1.2,
     "weirdness": 0.8,
+    "biome_diversity": 0.6,
 }
 
 
@@ -478,6 +479,8 @@ def select_seed(profile, seeds_db, stats):
     # Stage 1: Group seeds by biome, compute biome centers
     biome_groups = defaultdict(list)
     for entry in seeds_db:
+        if entry["spawn_biome"] == "unknown":
+            continue
         biome_groups[entry["spawn_biome"]].append(entry)
 
     best_biome = None
@@ -485,7 +488,10 @@ def select_seed(profile, seeds_db, stats):
     for biome, entries in biome_groups.items():
         center = {}
         for k in CLIMATE_WEIGHTS:
-            center[k] = sum(e["climate"][k] for e in entries) / len(entries)
+            if k == "biome_diversity":
+                center[k] = sum(min(e.get("biome_diversity", 5) / 15.0, 1.0) for e in entries) / len(entries)
+            else:
+                center[k] = sum(e["climate"][k] for e in entries) / len(entries)
         dist = _climate_distance(profile, center)
         if dist < best_dist or (dist == best_dist and (best_biome is None or biome < best_biome)):
             best_dist = dist
@@ -495,17 +501,29 @@ def select_seed(profile, seeds_db, stats):
     candidates = biome_groups[best_biome]
     scored = []
     for entry in candidates:
-        dist = _climate_distance(profile, entry["climate"])
+        # Merge climate dict with normalized biome_diversity for distance calc
+        climate_with_bd = dict(entry["climate"])
+        climate_with_bd["biome_diversity"] = min(entry.get("biome_diversity", 5) / 15.0, 1.0)
+        dist = _climate_distance(profile, climate_with_bd)
         scored.append((dist, entry))
     scored.sort(key=lambda x: (x[0], x[1]["seed"]))
 
     # Stage 3: Prefer Bedrock-compatible (32-bit) seeds, then tiebreak
     bedrock_safe = [(d, e) for d, e in scored if _is_bedrock_safe(e["seed"])]
     pool = bedrock_safe if len(bedrock_safe) >= 2 else scored
-    top_n = min(5, len(pool))
+    top_n = min(20, len(pool))
     fingerprint = stats_fingerprint(stats)
-    idx = int(fingerprint[:8], 16) % top_n
-    return pool[idx][1]
+
+    # Structure density shifts the pick toward seeds with higher biome diversity
+    sd = profile.get("structure_density", 0)
+    if sd > 0.3 and top_n > 3:
+        diversity_sorted = sorted(pool[:top_n], key=lambda x: x[1].get("biome_diversity", 0), reverse=True)
+        pick_n = max(3, round(top_n * (1 - sd * 0.7)))
+        idx = int(fingerprint[:8], 16) % pick_n
+        return diversity_sorted[idx][1]
+    else:
+        idx = int(fingerprint[:8], 16) % top_n
+        return pool[idx][1]
 
 
 def _is_bedrock_safe(seed):

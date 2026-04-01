@@ -947,8 +947,12 @@ class TestTwoStageSelection(unittest.TestCase):
             best_biome = None
             best_dist = float("inf")
             for biome, entries in biome_groups.items():
-                center = {k: sum(e["climate"][k] for e in entries)/len(entries)
-                          for k in gs.CLIMATE_WEIGHTS}
+                center = {}
+                for k in gs.CLIMATE_WEIGHTS:
+                    if k == "biome_diversity":
+                        center[k] = sum(min(e.get("biome_diversity", 5) / 15.0, 1.0) for e in entries) / len(entries)
+                    else:
+                        center[k] = sum(e["climate"][k] for e in entries) / len(entries)
                 d = gs._climate_distance(profile, center)
                 if d < best_dist:
                     best_dist = d
