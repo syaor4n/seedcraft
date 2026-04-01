@@ -568,10 +568,15 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
     tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
 
     # Pre-filled gallery submission URL
-    gallery_params = urllib.parse.urlencode({
+    gallery_params_dict = {
         "seed": seed,
         "comment": f"{total_h:.0f}h of coding" + (f" → {biome_display}" if not unique else ""),
-    })
+    }
+    if not unique:
+        gallery_params_dict["biome"] = biome_display.lower().replace(" ", "_")
+        for key in ("temperature", "humidity", "continentalness", "erosion", "weirdness", "structure_density", "biome_diversity"):
+            gallery_params_dict[key] = f"{profile[key]:.4f}"
+    gallery_params = urllib.parse.urlencode(gallery_params_dict)
     gallery_url = f"https://seedcraft.dev/gallery?share&{gallery_params}"
 
     return share_text, tweet_url, gallery_url
