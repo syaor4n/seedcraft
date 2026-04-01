@@ -118,10 +118,12 @@ your coding behavior.
 
    ```
    ---
-   **Share your world:** [Post on X]({tweet_url})
+   **Share your world:**
+   - [Post on X]({tweet_url})
+   - [Add to gallery]({gallery_url})
    ```
 
-   The `tweet_url` field in the JSON is a pre-filled twitter.com/intent/tweet link ready to click.
+   The `tweet_url` is a pre-filled twitter.com/intent/tweet link. The `gallery_url` opens seedcraft.dev/gallery with seed and comment pre-filled.
 
 5. If the user asks what the seed "means" or wants to explore:
    - Paste it into Minecraft directly (Java or Bedrock 1.18+)

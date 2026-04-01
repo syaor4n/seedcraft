@@ -548,7 +548,15 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
         )
 
     tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
-    return share_text, tweet_url
+
+    # Pre-filled gallery submission URL
+    gallery_params = urllib.parse.urlencode({
+        "seed": seed,
+        "comment": f"{total_h:.0f}h of coding" + (f" → {biome_display}" if not unique else ""),
+    })
+    gallery_url = f"https://seedcraft.dev/gallery?share&{gallery_params}"
+
+    return share_text, tweet_url, gallery_url
 
 # ---------------------------------------------------------------------------
 # Biome narration templates
@@ -1381,7 +1389,7 @@ def main():
         else:
             seed = generate_unique_seed(merged)
         compat = "Java & Bedrock" if _is_bedrock_safe(seed) else "Java only"
-        share_text, tweet_url = _make_share_card(seed, "UNIQUE", merged, unique=True)
+        share_text, tweet_url, gallery_url = _make_share_card(seed, "UNIQUE", merged, unique=True)
         if args.json:
             print(json.dumps({
                 "seed": seed,
@@ -1392,6 +1400,7 @@ def main():
                 "chunkbase_url": f"https://www.chunkbase.com/apps/seed-map#{seed}",
                 "share_text": share_text,
                 "tweet_url": tweet_url,
+                "gallery_url": gallery_url,
                 "mode": mode_label + " [unique]",
                 "stats": _serializable_stats(merged),
                 "unique": True,
@@ -1442,7 +1451,7 @@ def main():
     compat = "Java & Bedrock" if _is_bedrock_safe(seed) else "Java only"
     biome_display = BIOME_LABELS.get(seed_entry["spawn_biome"],
                                       seed_entry["spawn_biome"].upper().replace("_", " "))
-    share_text, tweet_url = _make_share_card(seed, biome_display, merged, profile)
+    share_text, tweet_url, gallery_url = _make_share_card(seed, biome_display, merged, profile)
     if args.json:
         print(json.dumps({
             "seed": seed,
@@ -1454,6 +1463,7 @@ def main():
             "chunkbase_url": f"https://www.chunkbase.com/apps/seed-map#{seed}",
             "share_text": share_text,
             "tweet_url": tweet_url,
+            "gallery_url": gallery_url,
             "profile": profile,
             "stats": _serializable_stats(merged),
             "mode": mode_label,
