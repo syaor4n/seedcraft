@@ -61,7 +61,7 @@ In Claude Code, run:
 /plugin install seedcraft@seedcraft
 ```
 
-That's it. Type `/seedcraft:seedcraft` to discover your Minecraft world.
+That's it. Type `/craft` to discover your Minecraft world.
 
 The plugin auto-updates when you restart Claude Code.
 
@@ -109,11 +109,11 @@ The output ranges are calibrated to Minecraft's actual biome parameter space. A 
 ### Skill commands
 
 ```
-/seedcraft:seedcraft                     # World from your current project (auto-detected from CWD)
-/seedcraft:seedcraft all                 # World from all your projects combined
-/seedcraft:seedcraft my-api              # World from a specific project
-/seedcraft:seedcraft unique              # 100% unique world hashed from your stats (biome is a surprise!)
-/seedcraft:seedcraft --list              # See all your projects
+/craft                     # World from your current project (auto-detected from CWD)
+/craft all                 # World from all your projects combined
+/craft my-api              # World from a specific project
+/craft unique              # 100% unique world hashed from your stats (biome is a surprise!)
+/craft --list              # See all your projects
 ```
 
 The skill also triggers on natural phrases like *"create my minecraft world"* or *"what's my minecraft world"*.
