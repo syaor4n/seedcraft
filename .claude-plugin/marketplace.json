@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "craft",
+      "name": "seedcraft",
       "source": "./",
       "description": "Turn your Claude Code coding stats into a unique Minecraft world. 500,000 curated seeds, 46 biomes, real climate correlation.",
       "version": "2.0.0",
