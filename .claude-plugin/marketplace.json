@@ -4,16 +4,23 @@
     "name": "syaor4n"
   },
   "metadata": {
-    "description": "Your code. Your world. — Claude Code plugin that turns your coding stats into a Minecraft world."
+    "description": "Your code. Your world. \u2014 Claude Code plugin that turns your coding stats into a Minecraft world."
   },
   "plugins": [
     {
-      "name": "seedcraft",
+      "name": "craft",
       "source": "./",
       "description": "Turn your Claude Code coding stats into a unique Minecraft world. 500,000 curated seeds, 46 biomes, real climate correlation.",
       "version": "2.0.0",
       "license": "MIT",
-      "keywords": ["minecraft", "seed", "stats", "gaming", "claude-code", "seedcraft"],
+      "keywords": [
+        "minecraft",
+        "seed",
+        "stats",
+        "gaming",
+        "claude-code",
+        "seedcraft"
+      ],
       "category": "creative-coding"
     }
   ]

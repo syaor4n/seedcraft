@@ -1,5 +1,5 @@
 {
-  "name": "seedcraft",
+  "name": "craft",
   "description": "Turn your Claude Code coding stats into a unique Minecraft world. Your messages control temperature, your tools grow vegetation, your hours raise mountains.",
   "version": "2.0.0",
   "author": {
@@ -8,5 +8,13 @@
   "homepage": "https://seedcraft.dev",
   "repository": "https://github.com/syaor4n/seedcraft",
   "license": "MIT",
-  "keywords": ["minecraft", "seed", "stats", "gaming", "claude-code", "creative-coding", "seedcraft"]
+  "keywords": [
+    "minecraft",
+    "seed",
+    "stats",
+    "gaming",
+    "claude-code",
+    "creative-coding",
+    "seedcraft"
+  ]
 }
