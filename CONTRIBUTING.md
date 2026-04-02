@@ -4,14 +4,12 @@ Thanks for your interest! Here are ways to contribute:
 
 ## Easy contributions
 
-- **Add narrative templates** — See `BIOME_NARRATIVES` in `scripts/generate_seed.py`. Each biome has a short text that explains *why* the user got that world. Some biomes still use the generic fallback. Write a better one!
+- **Add narrative templates** — See `BIOME_NARRATIVES` in `scripts/generate_seed.ts`. Each biome has a short text that explains *why* the user got that world. Some biomes still use the generic fallback. Write a better one!
 - **Expand the seed database** — Run `cd tools && make && make db` to generate more seeds, then merge them into `data/seeds_db.json`. More seeds = more unique worlds.
-- **Improve pretty_project_name** — The function that converts Claude Code project directory names to readable names. If it misparses yours, submit a fix with a test case.
 
 ## Medium contributions
 
 - **Add new climate mappings** — The `error_rate` and `night_ratio` stats are computed but unused. Have an idea for mapping them to a Minecraft parameter? Open an issue to discuss.
-- **Build a web UI** — A webpage where users can paste their `--json` output and see a visual world preview.
 - **Localization** — Translate narrative templates to other languages.
 
 ## Project layout
@@ -19,29 +17,28 @@ Thanks for your interest! Here are ways to contribute:
 This is a Claude Code **plugin** using the official plugin format:
 
 ```
-.claude-plugin/plugin.json     # Plugin manifest (name, version)
-skills/seedcraft/SKILL.md # Skill instructions (what Claude does)
-scripts/generate_seed.py       # Main Python script
-data/seeds_db.json             # Curated seed database
+.claude-plugin/plugin.json          # Plugin manifest (name, version)
+skills/seedcraft/SKILL.md           # Skill instructions (what Claude does)
+scripts/generate_seed.ts            # Main TypeScript script (zero dependencies)
+data/seeds_db.json                  # Curated seed database (local fallback)
 ```
 
-Users install with `/plugin add syaor4n/seedcraft`.
+Users install with `/plugin marketplace add syaor4n/seedcraft`.
 
 ## Development setup
 
 ```bash
 git clone https://github.com/syaor4n/seedcraft.git
 cd seedcraft
-python3 -m unittest tests.test_generate_seed -v  # Run tests
+node --experimental-strip-types scripts/generate_seed.ts --list  # Verify it works
 ```
 
-No dependencies to install. Just Python 3.9+.
+No dependencies to install. Just Node.js 22+.
 
 ## Guidelines
 
-- Run `python3 -m unittest tests.test_generate_seed` before submitting — all 108 tests must pass
 - If you change the climate profile or selection algorithm, verify with `--all` on real data
-- New narrative templates should reference the user's stats (use `{messages}`, `{tool_calls}`, `{hours:.0f}`, etc.) — never make static claims about the biome being "dry" or "cold" since the user's actual profile might contradict that
+- New narrative templates should reference the user's stats — never make static claims about the biome being "dry" or "cold" since the user's actual profile might contradict that
 - The seed database JSON should stay compact (no indentation) to keep the plugin size reasonable
 - Bump the `version` in `.claude-plugin/plugin.json` when making changes
 
@@ -52,14 +49,3 @@ cd tools
 make          # Clones cubiomes + compiles
 make db       # Generates 1000 seeds -> ../data/seeds_db.json
 ```
-
-The shipped database was built by merging multiple runs with different LCG seeds for maximum coverage:
-
-```bash
-./analyze_seeds 1000 1 > /tmp/batch1.json
-./analyze_seeds 1000 2 > /tmp/batch2.json
-./analyze_seeds 1000 3 > /tmp/batch3.json
-# Then merge with a script, deduplicate by seed value, remove "unknown" biomes
-```
-
-The second argument seeds the LCG random generator (not the Minecraft seed itself), producing different random distributions each time.

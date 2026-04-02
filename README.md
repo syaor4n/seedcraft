@@ -7,8 +7,7 @@
 Your [Claude Code](https://claude.ai/claude-code) stats create a unique Minecraft world.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-green.svg)](https://python.org)
-[![Tests: 108 passing](https://img.shields.io/badge/Tests-108%20passing-brightgreen.svg)](tests/)
+[![Node.js 22+](https://img.shields.io/badge/Node.js-22%2B-339933.svg)](https://nodejs.org)
 [![MC 1.21+](https://img.shields.io/badge/Minecraft-1.21%2B-62B47A.svg)](https://minecraft.wiki)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/syaor4n)
 [![Web](https://img.shields.io/badge/Web-seedcraft.dev-DA7756)](https://seedcraft.dev)
@@ -83,10 +82,10 @@ Then in Claude Code:
 ```bash
 git clone https://github.com/syaor4n/seedcraft.git
 cd seedcraft
-python3 scripts/generate_seed.py --all
+node --experimental-strip-types scripts/generate_seed.ts --all
 ```
 
-Only requires Python 3.9+. No pip install, no dependencies.
+Only requires Node.js 22+. No npm install, no dependencies.
 
 ## How your coding shapes the world
 
@@ -128,15 +127,14 @@ The skill also triggers on natural phrases like *"create my minecraft world"* or
 ### Standalone CLI
 
 ```bash
-python3 scripts/generate_seed.py                                # Current project (auto-detect CWD)
-python3 scripts/generate_seed.py --all                          # All projects combined
-python3 scripts/generate_seed.py --project "my-api"             # Specific project
-python3 scripts/generate_seed.py --unique                       # Unique hash-based seed
-python3 scripts/generate_seed.py --all --unique                 # Unique seed from all projects
-python3 scripts/generate_seed.py --list                         # List projects
-python3 scripts/generate_seed.py --all --stats-only             # Climate profile only
-python3 scripts/generate_seed.py --all --json                   # JSON output
-python3 scripts/generate_seed.py --all --db /path/to/seeds.json # Custom seed DB
+node --experimental-strip-types scripts/generate_seed.ts                     # Current project (auto-detect CWD)
+node --experimental-strip-types scripts/generate_seed.ts --all               # All projects combined
+node --experimental-strip-types scripts/generate_seed.ts --project "my-api"  # Specific project
+node --experimental-strip-types scripts/generate_seed.ts --unique            # Unique hash-based seed
+node --experimental-strip-types scripts/generate_seed.ts --all --unique      # Unique seed from all projects
+node --experimental-strip-types scripts/generate_seed.ts --list              # List projects
+node --experimental-strip-types scripts/generate_seed.ts --all --stats-only  # Climate profile only
+node --experimental-strip-types scripts/generate_seed.ts --all --json        # JSON output
 ```
 
 Fuzzy matching is supported: `--project dashboard` matches `dashboard-v2`, `admin-dashboard`, etc.
@@ -297,11 +295,7 @@ Very. The two-stage selection guarantees the seed's spawn biome matches the clos
 
 ## Running tests
 
-```bash
-python3 -m unittest tests.test_generate_seed -v
-```
-
-108 tests covering parsing, climate normalization, monotonicity, two-stage selection, narrative formatting, edge cases, fuzz testing, and full integration.
+Tests for the TypeScript CLI are planned. The seed matching logic is server-side (seedcraft.dev API).
 
 ## Project structure
 
@@ -313,11 +307,9 @@ seedcraft/
 │   └── seedcraft/
 │       └── SKILL.md           # Skill definition (instructions for Claude)
 ├── scripts/
-│   └── generate_seed.py       # Main script (no dependencies)
+│   └── generate_seed.ts       # Main script (TypeScript, zero dependencies)
 ├── data/
-│   └── seeds_db.json          # 500,000 curated seeds
-├── tests/
-│   └── test_generate_seed.py  # 108 tests
+│   └── seeds_db.json          # 500,000 curated seeds (local fallback)
 ├── tools/
 │   ├── analyze_seeds.c        # Cubiomes seed analyzer
 │   └── Makefile
