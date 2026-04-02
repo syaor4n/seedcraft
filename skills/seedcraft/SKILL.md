@@ -119,11 +119,10 @@ your coding behavior.
    ```
    ---
    **Share your world:**
-   - [Post on X]({tweet_url})
-   - [Add to gallery]({gallery_url})
+   - [Add to gallery]({gallery_url}) — this will generate a unique 3D voxel terrain from your climate profile
    ```
 
-   The `tweet_url` is a pre-filled twitter.com/intent/tweet link. The `gallery_url` opens seedcraft.dev/gallery with seed and comment pre-filled.
+   The `gallery_url` opens seedcraft.dev/gallery with seed, climate params, and stats pre-filled. When the user submits, a personalized 3D voxel terrain is rendered and captured as a thumbnail.
 
 5. If the user asks what the seed "means" or wants to explore:
    - Paste it into Minecraft directly (Java or Bedrock 1.18+)
