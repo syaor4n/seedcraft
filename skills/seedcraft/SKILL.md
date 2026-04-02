@@ -54,16 +54,16 @@ your coding behavior.
 
 2. Run the script with `--json` based on the user's choice:
    ```bash
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --json                           # Current project (auto-detect CWD)
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --all --json                     # All projects
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --all --unique --json            # Unique seed (all)
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --unique --json                  # Unique seed (current project)
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --project "name" --json          # Specific project
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.py --list                           # List projects
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --json                           # Current project (auto-detect CWD)
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --all --json                     # All projects
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --all --unique --json            # Unique seed (all)
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --unique --json                  # Unique seed (current project)
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --project "name" --json          # Specific project
+   node --experimental-strip-types ${CLAUDE_PLUGIN_ROOT}/scripts/generate_seed.ts --list                           # List projects
    ```
    `${CLAUDE_PLUGIN_ROOT}` is automatically resolved by Claude Code to the plugin's install directory.
 
-   **Note:** Requires Python 3.9+. If `python3` is not available, try `python`.
+   **Note:** Requires Node.js 22+. The `--experimental-strip-types` flag enables native TypeScript execution. No Python or npm dependencies needed.
 
 3. Format and present the JSON result to the user as a rich message.
 
