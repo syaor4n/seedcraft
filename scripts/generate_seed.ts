@@ -428,41 +428,41 @@ function sumToolCounts(byName: ToolCounter, toolSet: Set<string>): number {
 function computeClimateProfile(stats: DerivedStats): ClimateProfile {
   const profile: ClimateProfile = {} as ClimateProfile;
 
-  // Temperature: more messages = hotter world
+  // Temperature: 5000 messages → 0.50 (center of biome space)
   profile.temperature = normalize(stats.messages, [
-    [0, 0.15], [50, 0.18], [200, 0.22], [1000, 0.32],
-    [5000, 0.48], [20000, 0.65], [50000, 0.78],
-    [100000, 0.88], [500000, 0.92],
+    [0, 0.15], [100, 0.20], [500, 0.28], [2000, 0.38],
+    [5000, 0.50], [15000, 0.62], [40000, 0.75],
+    [100000, 0.85], [500000, 0.92],
   ]);
 
-  // Humidity: more total tool calls = lusher world
+  // Humidity: 2000 tool calls → 0.50
   profile.humidity = normalize(stats.tool_calls, [
-    [0, 0.25], [10, 0.27], [50, 0.30], [200, 0.35],
-    [1000, 0.42], [5000, 0.55], [15000, 0.65],
-    [30000, 0.72], [60000, 0.78], [200000, 0.82],
+    [0, 0.20], [50, 0.24], [200, 0.30], [800, 0.38],
+    [2000, 0.50], [8000, 0.62], [20000, 0.72],
+    [50000, 0.80], [200000, 0.85],
   ]);
 
-  // Continentalness: more write/edit calls = more continental
+  // Continentalness: 500 writes → 0.50
   profile.continentalness = normalize(stats.write_calls, [
-    [0, 0.40], [5, 0.42], [20, 0.45], [100, 0.50],
-    [500, 0.58], [2000, 0.67], [5000, 0.75],
-    [10000, 0.82], [30000, 0.88],
+    [0, 0.35], [10, 0.38], [50, 0.42], [200, 0.47],
+    [500, 0.52], [2000, 0.62], [5000, 0.72],
+    [10000, 0.80], [30000, 0.88],
   ]);
 
-  // Erosion: more total active time = less eroded = taller
+  // Erosion (inverted): 20 hours → 0.50
   const totalHours = stats.total_active_ms / 3_600_000;
   profile.erosion = normalize(totalHours, [
-    [0, 0.82], [0.5, 0.75], [2, 0.65], [5, 0.55],
-    [12, 0.45], [24, 0.37], [60, 0.28],
-    [120, 0.20], [500, 0.15],
+    [0, 0.85], [1, 0.78], [3, 0.70], [8, 0.60],
+    [20, 0.50], [50, 0.38], [100, 0.28],
+    [250, 0.18], [500, 0.15],
   ]);
 
-  // Weirdness: tool diversity
+  // Weirdness: 15 unique tools → 0.50
   const uniqueTools = stats.tools_used.size;
   profile.weirdness = normalize(uniqueTools, [
-    [0, 0.15], [2, 0.18], [5, 0.23], [10, 0.32],
-    [20, 0.45], [35, 0.58], [50, 0.68],
-    [75, 0.78], [120, 0.85],
+    [0, 0.15], [3, 0.22], [7, 0.32], [12, 0.42],
+    [20, 0.55], [35, 0.65], [50, 0.75],
+    [75, 0.82], [120, 0.88],
   ]);
 
   // Structure density: agent + orchestration calls
