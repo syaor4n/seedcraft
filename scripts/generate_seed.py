@@ -574,7 +574,7 @@ def _make_share_card(seed, biome_display, stats, profile=None, unique=False):
     }
     gallery_params_dict["stat_messages"] = str(stats["messages"])
     gallery_params_dict["stat_tool_calls"] = str(stats["tool_calls"])
-    gallery_params_dict["stat_active_hours"] = f"{stats['total_active_hours']:.1f}"
+    gallery_params_dict["stat_active_hours"] = f"{stats['total_active_ms'] / 3_600_000:.1f}"
     if not unique:
         gallery_params_dict["biome"] = biome_display.lower().replace(" ", "_")
         for key in ("temperature", "humidity", "continentalness", "erosion", "weirdness", "structure_density", "biome_diversity"):
