@@ -1499,6 +1499,7 @@ async function main(): Promise<void> {
     const compat = apiResult.compatibility ??
       (isBedrockSafe(seed) ? "Java & Bedrock" : "Java only");
     const biomeTier = apiResult.biome_tier;
+    const archetype = apiResult.archetype as { id: string; name: string; tagline: string } | undefined;
 
     // Use API profile if available, otherwise use computed profile
     if (apiResult.profile) {
@@ -1531,6 +1532,7 @@ async function main(): Promise<void> {
               `https://www.chunkbase.com/apps/seed-map#${seed}`,
             profile,
             biome_tier: biomeTier,
+            archetype: archetype ?? null,
             stats: serializableStats(derived),
             gallery_url,
             mode: modeLabel,

@@ -74,6 +74,8 @@ your coding behavior.
 
    **Biome: {spawn_biome_display}** — Spawn at ({spawn_x}, {spawn_z}) [{compatibility}]
 
+   **Archetype: {archetype.name}** — _{archetype.tagline}_
+
    ### Climate Profile
    | Parameter | Value | Label |
    |---|---|---|
